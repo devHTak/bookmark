@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %} Bookmark Detail {% endblock %}
+
+{% block content%}
+
+<!-- detail에서는 1개의 데이터만 오므로 object를 사용한다. -->
+{{object.site_name}} <br>
+{{object.url}}
+{% endblock %}

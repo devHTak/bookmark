@@ -1,0 +1,54 @@
+{% extends 'base.html'%}
+{% block title %}Bookmark List {% endblock %}
+<!-- Template 문법 -->
+
+<!-- { % ... % } -> 기능 태그 - 닫는 태그 { % endtag % } -->
+<!-- { { .... } } -> 출력 태그 -->
+{% csrf_token %}
+{% block content %}
+<div class="btn-group d-block text-right mb-1" role="group">
+  <a href="{ % url 'bookmark:create' % }" class="btn btn-info">Add</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Site</th>
+          <th scope="col">URL</th>
+          <th scope="col">Modify</th>
+          <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for bookmark in object_list %}
+    <!-- object_list 는 view 에서 받아 온 model 로 내부적으로 구현됨-->
+    <!-- 하나일 때는 object 로 사용한다. -->
+    <tr>
+        <td>
+            {{ forloop.counter }}
+            <!-- forloop 는 현재 for 문에서 사용하는 기본 변수 -->
+        </td>
+        <td>
+            <!-- URL Filter - 'bookmark namespace 안에 detail' < int,pk >를 맞춰줌 -->
+            <a href="{% url 'bookmark:detail' bookmark.id %}">{{ bookmark.site_name }}</a>
+
+        </td>
+        <td>
+            <a href="{{bookmark.url}}" target="_blank" class="btn btn-success">{{ bookmark.url }}</a>
+            <!-- target="_blank" 는 새 창으로 띄운다. -->
+            <!-- class 는 bootstrap 에 button 에서 가져옴 -->
+        </td>
+        <td>
+            <a href="{% url 'bookmark:update' bookmark.id %}" class="btn btn-success btn-sm">modify</a>
+        </td>
+        <td>
+            <a href="{% url 'bookmark:delete' bookmark.id %}" class="btn btn-danger btn-sm">delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
+{% endblock %}

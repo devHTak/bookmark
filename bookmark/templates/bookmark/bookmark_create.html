@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} Bookmark Write {% endblock %}
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        # 보안에서 꼭 필요, 장고에서 이 내용이 없으면 정상적으로 입력을 받지 않는다.
+        # CSRF 공격에 대비
+        {{ form.as_p }}
+        # CreateView 에서 제공하는 것으로 자동으로 form 을 만들어 field 에 대한 form 을 만든다.
+        # form 태그 목록으로 나온 것을 p 태그로 묶어준다는 의미
+        <input type="submit" class="btn btn-success" value="Write">
+    </form>
+
+{% endblock %}
