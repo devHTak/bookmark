@@ -7,7 +7,7 @@
 {% csrf_token %}
 {% block content %}
 <div class="btn-group d-block text-right mb-1" role="group">
-  <a href="{ % url 'bookmark:create' % }" class="btn btn-info">Add</a>
+  <a href="{% url 'bookmark:create' %}" class="btn btn-info">Add</a>
 </div>
 
 <table>
